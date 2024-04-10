@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------- Navbar and burger menu ------------------ */
+.menu_class{
+    width: 22%;
+}
+
+
+.menu {
+    position: fixed;
+    width: 22.2%;
+    height: 100vh;
+    background-color: white;
+    top: 0;
+    overflow-y: scroll;
+    transition:0.4s ease-in-out;
+    z-index: 10;
+}
+
+/* ------------- sliding menu ------------------ */
+.hidden {
+    left: -150%;
+}
+
+.visible {
+    left: 0;
+}

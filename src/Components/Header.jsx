@@ -39,13 +39,33 @@ function Header() {
   };
 
   return (
+    <>
     <div className="w-full flex flex-col fixed top-0 bg-white">
       <HeaderSlider />
       <div className="flex justify-between items-center px-10 py-5">
         <div className="text-black text-3xl">
           <RxHamburgerMenu onClick={updateMenu} />
         </div>
-        <div
+        
+        <div className="ml-44">
+          <Link to="/">
+            <img src={logo} alt="" className="w-60 object-cover" />
+          </Link>
+        </div>
+        <div className="text-black text-3xl flex justify-center items-center gap-4">
+          <Link to="/login">
+            <CiUser />
+          </Link>
+          <RxMagnifyingGlass />
+          <RxHeart />
+          <PiBagSimpleLight />
+          <RxCamera />
+        </div>
+      </div>
+    </div>
+
+
+    <div
           className={`menu`}
           style={{ left: `${menu_class ? "0" : "-150%"}` }}
         >
@@ -115,22 +135,7 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="ml-44">
-          <Link to="/">
-            <img src={logo} alt="" className="w-60 object-cover" />
-          </Link>
-        </div>
-        <div className="text-black text-3xl flex justify-center items-center gap-4">
-          <Link to="/login">
-            <CiUser />
-          </Link>
-          <RxMagnifyingGlass />
-          <RxHeart />
-          <PiBagSimpleLight />
-          <RxCamera />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

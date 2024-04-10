@@ -23,7 +23,7 @@ function SearchSideBar() {
     setpriceIsVisible(!ispriceVisible)
   }
   return (
-    <div className=" h-[80vh] cursor-pointer text-gray-600 fixed overflow-scroll mt-30 px-3">
+    <div className=" h-[80vh] cursor-pointer text-gray-600 fixed overflow-scroll mt-30 px-3 ">
       <div className="text-xl flex items-center w-36 gap-1 mb-5" onClick={collectionNone}>
           <IoCaretForwardOutline className="text-xl" />
           <h1>Collections</h1>

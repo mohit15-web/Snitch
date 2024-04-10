@@ -17,12 +17,12 @@
     top: 0;
     overflow-y: scroll;
     transition:0.4s ease-in-out;
-    z-index: 10;
+    z-index: 100;
 }
 
 /* ------------- sliding menu ------------------ */
 .hidden {
-    left: -150%;
+    left: -70%;
 }
 
 .visible {

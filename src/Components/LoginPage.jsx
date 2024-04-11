@@ -1,7 +1,9 @@
 import { CiMail } from "react-icons/ci";
 import indiaFlag from "../assets/images/indiaFlag.webp"
 function LoginPage() {
+  
   return (
+    
     <>
       <div className="flex justify-center flex-col items-center mt-48">
         <h1 className="text-3xl font-semibold">LOGIN WITH OTP</h1>

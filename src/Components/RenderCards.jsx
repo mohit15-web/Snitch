@@ -74,9 +74,74 @@ function RenderCards({searchText }) {
       price:1799
     },
     {
-      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSR5060-01-3249.jpg?v=1712568524&width=400",
-      name:"CLASSIC CUT BLACK TROUSER",
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS2729-05-M25.jpg?v=1712755676&width=600",
+      name:"MANDARIAN ELEGANCE PURPLE SHIRT",
       price:1799
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS2729-04-M38.jpg?v=1712755668&width=600",
+      name:"MANDARIAN ELEGANCE OLIVE SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MST2270-04-M32.jpg?v=1712744177&width=600",
+      name:"WAFFLE TEXTURE BLACK T-SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MST2270-03-M27.jpg?v=1712744104&width=600",
+      name:"WAFFLE TEXTURE ANCHOR GREY T-SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MST2270-02-M25.jpg?v=1712744009&width=600",
+      name:"WAFFLE TEXTURE GREY T-SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MST2270-01-M13.jpg?v=1712751747&width=600",
+      name:"WAFFLE TEXTURE WHITE T-SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS2885-02-M24.jpg?v=1712755535&width=600",
+      name:"CUBIX CHECKS OLIVE SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS2885-01-M33.jpg?v=1712755547&width=400",
+      name:"CUBIX CHECKS NAVY SHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSK8580-03-M22.jpg?v=1712042382&width=400",
+      name:"WILD ENOUGH GREEN OVERSHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSK8580-02-M56.jpg?v=1712042328&width=400",
+      name:"WILD ENOUGH OLIVE OVERSHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSK8580-01-M35_ecf63950-6cd5-4fcb-bb4a-510af6c93230.jpg?v=1712383020&width=400",
+      name:"WILD ENOUGH BROWN OVERSHIRT",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSWH9878-05-M34.jpg?v=1706509169&width=400",
+      name:"SUPINE NAVY BLUE HOODIE",
+      price:1499
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSWH9878-04-M16.jpg?v=1706508809&width=400",
+      name:"SUPINE MAROON HOODIE",
+      price:1199
+    },
+    {
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSWH9878-01-M17.jpg?v=1706508673&width=400",
+      name:"SUPINE WHITE HOODIE",
+      price:1199
     },
   ];
 
@@ -90,7 +155,7 @@ function RenderCards({searchText }) {
   }, [searchText]);
 
   return (
-    <div className="cardContainer flex flex-wrap gap-3 px-10">
+    <div className="cardContainer flex justify-center flex-wrap gap-3 px-10">
       {filteredProducts.map((product,index) => {
         // const image2 = product.images
         // console.log(image2);

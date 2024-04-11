@@ -21,10 +21,22 @@
 }
 
 /* ------------- sliding menu ------------------ */
-.hidden {
+.SideBarhidden {
     left: -70%;
 }
 
 .visible {
     left: 0;
+}
+
+@media (max-width:768px) {
+    .menu{
+        width: 40%;
+    }
+}
+
+@media (max-width:520px) {
+    .menu{
+        width: 60%;
+    }
 }

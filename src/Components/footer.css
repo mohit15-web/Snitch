@@ -1,0 +1,9 @@
+.footer a:hover{
+    color: gray;
+    text-decoration: underline;
+}
+
+.footer{
+    border-top: 1px solid gray;
+    /* padding: 20px 0; */
+}

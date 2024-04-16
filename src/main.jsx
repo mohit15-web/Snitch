@@ -6,6 +6,7 @@ import Error from './Components/Error.jsx'
 import LoginPage from './Components/LoginPage.jsx'
 import Header from "./Components/Header"
 import Search from "./Components/Search"
+import Footer from './Components/Footer'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <>
     <Header />
     <Outlet />
+    <Footer />
     </>
   )
 }
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
         path:"/login",
         element:<LoginPage />
       },
+      
     ],
     errorElement: <Error />
     

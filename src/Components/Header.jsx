@@ -16,11 +16,18 @@ import { CiUser } from "react-icons/ci";
 import logo from "../assets/images/logo.webp";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import Cart from "./Cart";
 
 function Header() {
   // to change burger classes
   const [menu_class, setMenuClass] = useState(false);
   const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  const [isCartOpen ,setIsCarOpen] = useState(false)
+
+  const toggleCart = () => {
+    setIsCarOpen(!isCartOpen)
+  }
 
   // toggle burger menu change
   const updateMenu = () => {
@@ -56,14 +63,14 @@ function Header() {
               />
             </Link>
           </div>
-          <div className="text-black text-3xl flex justify-center items-center gap-4">
+          <div className="text-black text-3xl flex justify-center items-center gap-4 cursor-pointer">
             <Link to="/login">
               <CiUser />
             </Link>
-            <RxMagnifyingGlass />
-            <RxHeart />
-            <PiBagSimpleLight />
-            <RxCamera />
+            <RxMagnifyingGlass className="hidden xl:block"/>
+            <RxHeart className="hidden xl:block" />
+            <PiBagSimpleLight onClick={toggleCart}/>
+            <RxCamera className="hidden xl:block"/>
           </div>
         </div>
       </div>
@@ -131,6 +138,8 @@ function Header() {
           </div>
         </div>
       </div>
+
+      {isCartOpen && <Cart />}
     </>
   );
 }

@@ -7,7 +7,6 @@ import {
   RxHamburgerMenu,
   RxMagnifyingGlass,
   RxHeart,
-  RxCamera,
   RxInstagramLogo,
   RxLinkedinLogo,
   RxTwitterLogo,
@@ -15,19 +14,18 @@ import {
 import { CiUser } from "react-icons/ci";
 import logo from "../assets/images/logo.webp";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
 
 function Header() {
   // to change burger classes
   const [menu_class, setMenuClass] = useState(false);
   const [isMenuClicked, setIsMenuClicked] = useState(false);
-
-  const [isCartOpen ,setIsCarOpen] = useState(false)
+  const [isCartOpen, setIsCarOpen] = useState(false);
 
   const toggleCart = () => {
-    setIsCarOpen(!isCartOpen)
-  }
+    setIsCarOpen(!isCartOpen);
+  };
 
   // toggle burger menu change
   const updateMenu = () => {
@@ -45,13 +43,16 @@ function Header() {
     setIsMenuClicked(false);
   };
 
+  const navigate = useNavigate()
+  let user = JSON.parse(localStorage.getItem("user"));
+  // console.log();
   return (
     <>
-      <div className="w-full flex flex-col fixed top-0 bg-white">
-        <HeaderSlider />
+      <div className="w-full flex flex-col fixed top-0 bg-white z-50">
+        <HeaderSlider  />
         <div className="flex justify-between items-center px-10 py-5">
           <div className="text-black text-3xl">
-            <RxHamburgerMenu onClick={updateMenu} />
+            <RxHamburgerMenu onClick={updateMenu} className="cursor-pointer" />
           </div>
 
           <div className="ml-44">
@@ -64,13 +65,25 @@ function Header() {
             </Link>
           </div>
           <div className="text-black text-3xl flex justify-center items-center gap-4 cursor-pointer">
-            <Link to="/login">
-              <CiUser />
-            </Link>
-            <RxMagnifyingGlass className="hidden xl:block"/>
+            {user?.displayName ? (
+              <h1 className="hidden xl:block">{user?.displayName}</h1>
+            ) : (
+              ""
+            )}
+            <div>
+              {user?.displayName ? <button className="text-lg rounded-lg bg-black text-white px-6 py-2"
+              onClick={() => localStorage.clear()}
+              >
+                Logout
+              </button> : <button className="text-lg rounded-lg bg-black text-white px-6 py-2"
+              onClick={() => navigate("/login")}
+              >
+                Log in
+              </button>}
+            </div>
+            <RxMagnifyingGlass className="hidden xl:block" />
             <RxHeart className="hidden xl:block" />
-            <PiBagSimpleLight onClick={toggleCart}/>
-            <RxCamera className="hidden xl:block"/>
+            <PiBagSimpleLight onClick={toggleCart} />
           </div>
         </div>
       </div>
@@ -84,7 +97,7 @@ function Header() {
             </div>
             <div>
               <button
-                className="close text-xl text-gray-500"
+                className="close text-xl text-gray-500 cursor-pointer"
                 onClick={closeMenu}
               >
                 X
@@ -92,29 +105,29 @@ function Header() {
             </div>
           </div>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">NEW ARRIVALS</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">NEW ARRIVALS</h1>
           <hr className="text-black" />
 
-          <h1 className="text-xl px-7 py-5 tracking-widest">BEST SELLING</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">BEST SELLING</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">SNITCH LUXE</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">SNITCH LUXE</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">SUITS & BLAZERS</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">SUITS & BLAZERS</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">SHOP</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">SHOP</h1>
           <hr className="text-black" />
 
-          <h1 className="text-xl px-7 py-5 tracking-widest">TRACK ORDER</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">TRACK ORDER</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">
             AFFILIATE PROGRAM
           </h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">CUSTOM SUPPORT</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">CUSTOM SUPPORT</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">VISIT STORE</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">VISIT STORE</h1>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest">RELOVE</h1>
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">RELOVE</h1>
           <hr className="text-black" />
           <div className="flex flex-wrap">
             <div className="border py-4 px-9">

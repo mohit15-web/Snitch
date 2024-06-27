@@ -1,158 +1,146 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-  // More products...
-]
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import cartLogo from "../assets/SVG/cart.svg";
+import { useEffect, useState } from "react";
+import { IndianRupee, Trash } from "lucide-react";
+import { DECREASE_QUANTITY, REMOVE_FROM_CART, addToCart } from "../store/slice";
+import { toast } from "react-toastify";
 
 export default function Cart() {
-  const [open, setOpen] = useState(true)
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch()
+  const [total, setTotal] = useState(0);
+  const navigate = useNavigate()
 
-  return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-in-out duration-500"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in-out duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
+  useEffect(() => {
+    setTotal(cart.reduce((acc, item) => acc + (item.price * item.quantity), 0));
+  }, [cart]);
 
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <Transition.Child
-                as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
-              >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            <span className="absolute -inset-0.5" />
-                            <span className="sr-only">Close panel</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
+  const handleRemove = (id) => {
+    dispatch(REMOVE_FROM_CART(id));
+    toast.success("Item removed from cart!", {
+      position: "bottom-right",
+      theme: "colored",
+    });
+  };
 
-                      <div className="mt-8">
-                        <div className="flow-root">
-                          <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
+  const increaseItem = (product) => {
+    dispatch(addToCart(product));
+  }
 
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.href}>{product.name}</a>
-                                      </h3>
-                                      <p className="ml-4">{product.price}</p>
-                                    </div>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.quantity}</p>
+  const decreaseItem = ( product) => {
+    dispatch(DECREASE_QUANTITY(product));
+  }
 
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      >
-                                        Remove
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
+  const handlePayment = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+   if (!user) {
+     toast.error("Please login for checkout", {
+       position: "bottom-right",
+       theme: "colored",
+     });
+     return;
+   }
+   navigate("/checkout");
+ };
+
+  console.log(cart);
+  return cart.length === 0 ? (
+    <div className="py-60 flex flex-col justify-center items-center dark:bg-[rgb(32,33,36)] dark:text-white">
+      <img src={cartLogo} alt="cartLogo" className="h-60 w-60" />
+      <h1>Cart is empty</h1>
+    </div>
+  ) : (
+    <div className="pt-20 dark:bg-[rgb(32,33,36)] dark:text-white">
+      <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2 ">
+        <h2 className="text-3xl font-bold">Your cart</h2>
+
+        <ul className="flex flex-col divide-y divide-gray-200">
+          {cart.map((product, index) => (
+            <li
+              key={index}
+              className="flex flex-col py-6 sm:flex-row sm:justify-between"
+            >
+              <div className="flex w-full space-x-2 sm:space-x-4">
+                <img
+                  className="h-20 w-20 object-center rounded-xl sm:h-32 sm:w-32"
+                  src={product.image}
+                  alt={product.name}
+                />
+                <div className="flex w-full flex-col justify-between pb-4">
+                  <div className="flex w-full justify-between space-x-2 pb-2">
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-semibold leading-snug sm:pr-8">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm">{product.color}</p>
                     </div>
-
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal</p>
-                        <p>$262.00</p>
-                      </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                      <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Checkout
-                        </a>
-                      </div>
-                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
-                          or{' '}
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
-                          </button>
-                        </p>
-                      </div>
+                    <div className="text-right flex justify-center items-center">
+                      <p className="text-xl font-semibold flex justify-center items-center">
+                        {" "}
+                        <IndianRupee size={19} />
+                        {product.price}
+                      </p>
                     </div>
                   </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
+                  <div className="flex justify-between text-sm">
+                    <button
+                      type="button"
+                      className="flex items-center space-x-2 px-2 py-1 pl-0"
+                      onClick={() => handleRemove(product.id)}
+                    >
+                      <Trash size={16} />
+                      <span>Remove</span>
+                    </button>
+                    <div className="group flex h-6 flex-shrink-0 items-center justify-between rounded-md md:h-8  text-black border">
+                      <button
+                        className="text-heading hover:bg-heading flex h-full w-12 flex-shrink-0 items-center justify-center border-e border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-8"
+                        onClick={() => decreaseItem(product)}
+                      >
+                        -
+                      </button>
+                      <span className="duration-250 text-heading flex h-full w-12  flex-shrink-0 cursor-default items-center justify-center text-base font-semibold transition-colors ease-in-out  md:w-20 xl:w-12">
+                        {product.quantity}
+                      </span>
+                      <button
+                        className="text-heading hover:bg-heading flex h-full w-10 flex-shrink-0 items-center justify-center border-s border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-8"
+                        onClick={() => increaseItem(product)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className=" flex justify-end">
+          <p className="text-xl mr-3">Total amount:</p>{" "}
+          <span className="font-semibold text-xl flex justify-center items-center ">
+            {" "}
+            <IndianRupee size={19} />
+            {total}
+          </span>
         </div>
-      </Dialog>
-    </Transition.Root>
-  )
+        <div className="flex justify-end space-x-4">
+          <Link to="/">
+            <button
+              type="button"
+              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:border-white dark:text-white"
+            >
+              Back
+            </button>
+          </Link>
+          <button
+            type="button"
+            className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:border-white dark:text-white"
+            onClick={handlePayment}
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

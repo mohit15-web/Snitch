@@ -10,6 +10,9 @@ import Footer from "./Components/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Cart from "./Components/Cart.jsx";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 function App() {
   return (
     <>
@@ -34,11 +37,17 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage />,
       },
+      {
+        path:'/cart',
+        element:<Cart/>
+      }
     ],
     errorElement: <Error />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

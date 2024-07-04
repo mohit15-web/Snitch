@@ -60,7 +60,7 @@ function Header() {
           </div>
           <div className="text-black text-3xl flex justify-center items-center gap-4 cursor-pointer">
             {user?.displayName ? (
-              <h1 className="hidden xl:block">{user?.displayName}</h1>
+              <h1 className="hidden xl:block">{user?.displayName.split(' ')[0]}</h1>
             ) : (
               ""
             )}
@@ -68,7 +68,10 @@ function Header() {
               {user?.displayName ? (
                 <button
                   className="text-lg rounded-lg bg-black text-white px-6 py-2"
-                  onClick={() => localStorage.clear()}
+                  onClick={() =>{
+                    localStorage.clear()
+                    window.location.reload()
+                  }}
                 >
                   Logout
                 </button>

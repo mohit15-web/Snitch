@@ -13,10 +13,13 @@ import { ToastContainer } from "react-toastify";
 import Cart from "./Components/Cart.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import {Checkout} from "./Components/Checkout.jsx";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 function App() {
   return (
     <>
       <ToastContainer />
+      <ScrollToTop/>
       <Header />
       <Outlet />
       <Footer />
@@ -40,6 +43,10 @@ const router = createBrowserRouter([
       {
         path:'/cart',
         element:<Cart/>
+      },
+      {
+        path:"/checkout",
+        element:<Checkout/>
       }
     ],
     errorElement: <Error />,

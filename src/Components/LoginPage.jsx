@@ -4,7 +4,7 @@ import { BsGoogle } from "react-icons/bs";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
 import { validateForm } from "../utils/validate";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const [showSignUp, setShowSignUp] = useState(false);

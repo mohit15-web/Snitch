@@ -14,6 +14,7 @@ import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function Header() {
   const {cart} = useSelector((state) => state.cart);
@@ -70,14 +71,20 @@ function Header() {
                   className="text-lg rounded-lg bg-black text-white px-6 py-2"
                   onClick={() =>{
                     localStorage.clear()
-                    window.location.reload()
+                    toast.success("Logged out successfully",{
+                      position: "bottom-right",
+                      theme: "colored",
+                    })
+                    setTimeout(() => {
+                      window.location.reload()
+                    },1000)
                   }}
                 >
                   Logout
                 </button>
               ) : (
                 <button
-                  className="text-lg rounded-lg bg-black text-white px-6 py-2"
+                  className="text-lg rounded-lg bg-black w-28 px-2 py-2 text-white 2xl:px-6 2xl:py-2"
                   onClick={() => navigate("/login")}
                 >
                   Log in
@@ -88,8 +95,6 @@ function Header() {
               className="hidden xl:block"
               onClick={() => navigate("/")}
             />
-            {/* <RxHeart className="hidden xl:block" /> */}
-            {/* <CgShoppingCart onClick={() => navigate("/cart")} /> */}
             <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
             {cart.length > 0 ? (
               <span className="absolute -top-5 -right-4 bg-green-600 text-white font-semibold rounded-full text-xl w-[20px] p-4 h-[12px] flex justify-center items-center ">
@@ -98,7 +103,7 @@ function Header() {
             ) : (
               ""
             )}
-            <ShoppingCart className="h-8 w-8" />{" "}
+            <ShoppingCart className="h-8 w-8 hidden xl:block 2xl:block lg:block" />{" "}
           </div>
           </div>
         </div>

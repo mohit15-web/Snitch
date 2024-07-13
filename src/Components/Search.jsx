@@ -27,9 +27,9 @@ function Search() {
 
   return (
     <>
-      <div className='flex gap-5 mt-28 sm:px-0 2xl:px-32 2xl:mt-48'>
+      <div className='flex gap-5 mt-28 sm:px-0 xl:px-10 2xl:px-32 2xl:mt-48'>
         {showSideBar && <SearchSideBar />}
-        <div className="w-full sm:ml-0 2xl:ml-48">
+        <div className="w-full sm:ml-0 xl:ml-40 2xl:ml-48">
           <div className='flex justify-center gap-5 mb-10 2xl:pl-10'>
             <input
               type="text"

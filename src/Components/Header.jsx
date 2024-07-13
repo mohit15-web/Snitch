@@ -95,7 +95,7 @@ function Header() {
               className="hidden xl:block"
               onClick={() => navigate("/")}
             />
-            <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
+            <div className="relative cursor-pointer hidden xl:block 2xl:block lg:block" onClick={() => navigate("/cart")}>
             {cart.length > 0 ? (
               <span className="absolute -top-5 -right-4 bg-green-600 text-white font-semibold rounded-full text-xl w-[20px] p-4 h-[12px] flex justify-center items-center ">
                 {cart.length}
@@ -103,7 +103,7 @@ function Header() {
             ) : (
               ""
             )}
-            <ShoppingCart className="h-8 w-8 hidden xl:block 2xl:block lg:block" />{" "}
+            <ShoppingCart className="h-8 w-8 " />{" "}
           </div>
           </div>
         </div>
@@ -114,7 +114,11 @@ function Header() {
           <div className="w-full flex justify-between items-center px-7 py-5">
             <div className="flex items-center gap-2 text-2xl">
               <FaCircleUser />
+              {user?.displayName ? (
+              <h1 className="hidden xl:block">{user?.displayName.split(' ')[0]}</h1>
+            ) : (
               <h1 className="text-xl">Log In</h1>
+            )}
             </div>
             <div>
               <button

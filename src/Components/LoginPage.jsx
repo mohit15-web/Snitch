@@ -28,6 +28,8 @@ function LoginPage() {
           position: "bottom-right",
           theme: "colored",
         });
+
+        navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code;

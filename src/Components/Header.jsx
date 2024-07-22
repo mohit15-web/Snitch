@@ -21,6 +21,7 @@ function Header() {
   // to change burger classes
   const [menu_class, setMenuClass] = useState(false);
   const [isMenuClicked, setIsMenuClicked] = useState(false);
+  const navigate = useNavigate();
 
   // toggle burger menu change
   const updateMenu = () => {
@@ -38,7 +39,6 @@ function Header() {
     setIsMenuClicked(false);
   };
 
-  const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("user"));
   // console.log();
   return (
@@ -84,7 +84,7 @@ function Header() {
                 </button>
               ) : (
                 <button
-                  className="text-lg rounded-lg bg-black w-28 px-2 py-2 text-white 2xl:px-6 2xl:py-2"
+                  className="text-lg rounded-lg bg-black px-2 py-2 text-white 2xl:px-6 2xl:py-2"
                   onClick={() => navigate("/login")}
                 >
                   Log in
@@ -93,7 +93,7 @@ function Header() {
             </div>
             <RxMagnifyingGlass
               className="hidden xl:block"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/search")}
             />
             <div className="relative cursor-pointer hidden xl:block 2xl:block lg:block" onClick={() => navigate("/cart")}>
             {cart.length > 0 ? (
@@ -130,12 +130,16 @@ function Header() {
             </div>
           </div>
           <hr className="text-black" />
-          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer"
+          onClick={() => navigate("/search")}
+          >
             NEW ARRIVALS
           </h1>
           <hr className="text-black" />
 
-          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer">
+          <h1 className="text-xl px-7 py-5 tracking-widest cursor-pointer"
+          onClick={() => navigate("/search")}
+          >
             BEST SELLING
           </h1>
           <hr className="text-black" />

@@ -84,26 +84,26 @@ export default function Cart() {
                     </div>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <button
+                    <h1
                       type="button"
-                      className="flex items-center space-x-2 px-2 py-1 pl-0"
+                      className="flex items-center cursor-pointer space-x-2 px-2 py-1 pl-0"
                       onClick={() => handleRemove(product.id)}
                     >
                       <Trash size={16} />
                       <span>Remove</span>
-                    </button>
+                    </h1>
                     <div className="group flex h-6 flex-shrink-0 items-center justify-between rounded-md md:h-8  text-black border">
                       <button
-                        className="text-heading hover:bg-heading flex h-full w-12 flex-shrink-0 items-center justify-center border-e border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-8"
+                        className=""
                         onClick={() => decreaseItem(product)}
                       >
                         -
                       </button>
-                      <span className="duration-250 text-heading flex h-full w-12  flex-shrink-0 cursor-default items-center justify-center text-base font-semibold transition-colors ease-in-out  md:w-20 xl:w-12">
+                      <span className="duration-250 text-heading flex h-full  flex-shrink-0 cursor-default items-center justify-center text-base font-semibold transition-colors ease-in-out  md:w-20 xl:w-12">
                         {product.quantity}
                       </span>
                       <button
-                        className="text-heading hover:bg-heading flex h-full w-10 flex-shrink-0 items-center justify-center border-s border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-8"
+                       
                         onClick={() => increaseItem(product)}
                       >
                         +

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import backpack from "../../public/images/backpack.png";
+import backpack from "/images/backpack.png";
 import './Main.css'
+import Carousel from "./Carousel";
 const Main = () => {
   return (
+   <>
     <main className="landing  container pt-44 px-20 xl:px-0">
       <div className="main-text">
         <h1>YOUR EVERYDAY ESSENTIALS DESERVE THE BEST.</h1>
@@ -45,6 +47,8 @@ const Main = () => {
         <img src={backpack} alt="img" className="bigimg" />
       </div>
     </main>
+    <Carousel/>
+   </>
   );
 };
 

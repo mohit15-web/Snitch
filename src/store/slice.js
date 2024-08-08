@@ -55,6 +55,6 @@ export const {
   removeFromCart,
   DECREASE_QUANTITY,
   REMOVE_FROM_CART,
-  emptyCart
+  emptyCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -16,6 +16,7 @@ import store from "./store/store.js";
 import { Checkout } from "./Components/Checkout.jsx";
 import ScrollToTop from "./Components/ScrollToTop.jsx";
 import Main from "./Components/Main.jsx";
+import LandingPage from "./Components/LandingPage.jsx";
 function App() {
   return (
     <>
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Main />,
+        element: <LandingPage />,
       },
       {
         path: "/search",
